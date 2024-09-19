@@ -116,7 +116,7 @@ TButton.propTypes = {
   href: PropTypes.string,
   link: PropTypes.bool,
   target: PropTypes.string,
-  onClick: PropTypes.node,
+  onClick: PropTypes.func,
   children: PropTypes.node,
 };
 
