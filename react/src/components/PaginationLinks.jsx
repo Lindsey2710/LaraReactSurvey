@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 export default function PaginationLinks({ meta, onPageClick }) {
 
   function onClick(ev, link) {
@@ -9,7 +11,7 @@ export default function PaginationLinks({ meta, onPageClick }) {
   }
 
   return (
-    <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6 shadow-md mt-4">
+    <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6 shadow-md--lg mt-4">
       <div className="flex flex-1 justify-between sm:hidden">
         <a
           href="#"
@@ -63,3 +65,8 @@ export default function PaginationLinks({ meta, onPageClick }) {
     </div>
   );
 }
+
+PaginationLinks.propTypes = {
+  meta: PropTypes.object.isRequired,
+  onPageClick: PropTypes.func.isRequired,
+};
