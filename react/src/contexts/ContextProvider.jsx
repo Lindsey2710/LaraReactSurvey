@@ -6,12 +6,17 @@ const StateContext = createContext({
   currentUser: {},
   userToken: null,
   surveys: [],
+  questionTypes: [],
+  toast: {
+    message: null,
+    show: false,
+  },
   setCurrentUser: () => {},
   setUserToken: () => {},
 });
 
 const tmpSurveys = [
-  {
+/*   {
     id: 1,
     image_url: "https://api.yoursurveys.xyz/images/vJutXzn02CDwdOyh.png",
     title: "TheCodeholic YouTube channel",
@@ -184,13 +189,21 @@ const tmpSurveys = [
     updated_at: "2022-01-07 13:28:56",
     expire_date: "2022-01-20",
     questions: [],
-  },
+  }, */
 ];
 
 export const ContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState({});
   const [userToken, _setUserToken] = useState(localStorage.getItem('TOKEN') || '');
-  const [surveys] = useState(tmpSurveys); //setSurveys ontbreekt in [] voorlopig
+  const [surveys, setSurveys] = useState(tmpSurveys);
+  const [questionTypes] = useState([
+    "text",
+    "radio",
+    "checkbox",
+    "select",
+    "textarea",
+  ]);
+  const [toast, setToast] = useState({message: '', show: false})
 
   const setUserToken = (token) => {
     if (token) {
@@ -201,6 +214,13 @@ export const ContextProvider = ({ children }) => {
     _setUserToken(token);
   };
 
+  const showToast = (message) => {
+    setToast({ message, show: true })
+    setTimeout(() => {
+      setToast({message: '', show: false})
+    }, 5000)
+  }
+
   return (
     <StateContext.Provider
       value={{
@@ -209,6 +229,9 @@ export const ContextProvider = ({ children }) => {
         userToken,
         setUserToken,
         surveys,
+        questionTypes,
+        toast,
+        showToast,
       }}
     >
       {children}
@@ -216,8 +239,8 @@ export const ContextProvider = ({ children }) => {
   );
 };
 
+export const useStateContext = () => useContext(StateContext);
+
 ContextProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
-
-export const useStateContext = () => useContext(StateContext);

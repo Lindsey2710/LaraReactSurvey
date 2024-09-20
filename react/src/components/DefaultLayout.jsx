@@ -13,6 +13,8 @@ import { Navigate, NavLink, Outlet } from "react-router-dom";
 import surveyImage from "../assets/survey.png";
 import { useStateContext } from "../contexts/ContextProvider";
 import axiosClient from "../axios";
+import { useEffect } from "react";
+
 
 const navigation = [
   { name: "Dashboard", to: "/" },
@@ -39,6 +41,13 @@ export default function DefaultLayout() {
         setUserToken(null);
     });
   };
+
+  useEffect(() => {
+    axiosClient.get('/me')
+      .then(({ data }) => {
+        setCurrentUser(data)
+      })
+  }, [])
 
   return (
     <>
