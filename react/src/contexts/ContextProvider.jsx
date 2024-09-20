@@ -189,8 +189,17 @@ const tmpSurveys = [
 
 export const ContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState({});
-  const [userToken, setUserToken] = useState("");
-  const [surveys, setSurveys] = useState(tmpSurveys);
+  const [userToken, _setUserToken] = useState(localStorage.getItem('TOKEN') || '');
+  const [surveys] = useState(tmpSurveys); //setSurveys ontbreekt in [] voorlopig
+
+  const setUserToken = (token) => {
+    if (token) {
+      localStorage.setItem('TOKEN', token)
+    } else {
+      localStorage.removeItem('TOKEN')
+    }
+    _setUserToken(token);
+  };
 
   return (
     <StateContext.Provider

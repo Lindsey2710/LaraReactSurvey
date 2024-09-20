@@ -12,28 +12,32 @@ import { UserIcon } from "@heroicons/react/20/solid";
 import { Navigate, NavLink, Outlet } from "react-router-dom";
 import surveyImage from "../assets/survey.png";
 import { useStateContext } from "../contexts/ContextProvider";
-
+import axiosClient from "../axios";
 
 const navigation = [
   { name: "Dashboard", to: "/" },
   { name: "Surveys", to: "/surveys" },
 ];
 
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function DefaultLayout() {
-  const { currentUser, userToken } = useStateContext();
+  const { currentUser, userToken, setCurrentUser, setUserToken } =
+    useStateContext();
 
   if (!userToken) {
-    return <Navigate to='login' />
+    return <Navigate to="login" />;
   }
 
   const logout = (ev) => {
     ev.preventDefault();
-    console.log("logout");
+    axiosClient.post("/logout")
+      .then((res) => {
+        setCurrentUser({});
+        setUserToken(null);
+    });
   };
 
   return (
@@ -79,7 +83,7 @@ export default function DefaultLayout() {
                       <MenuButton className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                         <span className="absolute -inset-1.5" />
                         <span className="sr-only">Open user menu</span>
-                        <UserIcon className="w-10 h-10 bg-gray-600 p-2 rounded-full text-white hover:bg-black"/>
+                        <UserIcon className="w-10 h-10 bg-gray-600 p-2 rounded-full text-white hover:bg-black" />
                       </MenuButton>
                     </div>
                     <MenuItems
@@ -139,7 +143,7 @@ export default function DefaultLayout() {
             <div className="border-t border-gray-700 pb-3 pt-4">
               <div className="flex items-center px-5">
                 <div className="flex-shrink-0">
-                <UserIcon className="w-10 h-10 bg-gray-600 p-2 rounded-full text-white hover:bg-black"/>
+                  <UserIcon className="w-10 h-10 bg-gray-600 p-2 rounded-full text-white hover:bg-black" />
                 </div>
                 <div className="ml-3">
                   <div className="text-base font-medium leading-none text-white">
