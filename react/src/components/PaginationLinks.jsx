@@ -1,13 +1,12 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 export default function PaginationLinks({ meta, onPageClick }) {
-
   function onClick(ev, link) {
     ev.preventDefault();
     if (!link.url) {
       return;
     }
-    onPageClick(link)
+    onPageClick(link);
   }
 
   return (
@@ -15,14 +14,14 @@ export default function PaginationLinks({ meta, onPageClick }) {
       <div className="flex flex-1 justify-between sm:hidden">
         <a
           href="#"
-          onClick={ev => onClick(ev, meta.links[0])}
+          onClick={(ev) => onClick(ev, meta.links[0])}
           className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
         >
           Previous
         </a>
         <a
           href="#"
-          onClick={ev => onClick(ev, meta.links[meta.links.length - 1])}
+          onClick={(ev) => onClick(ev, meta.links[meta.links.length - 1])}
           className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
         >
           Next
@@ -37,29 +36,31 @@ export default function PaginationLinks({ meta, onPageClick }) {
           </p>
         </div>
         <div>
-          {meta.total > meta.per_page && <nav
-            className="isolate inline-flex -space-x-px rounded-md shadow-sm"
-            aria-label="Pagination"
-          >
-            {/* Current: "z-10 bg-indigo-50 border-indigo-500 text-indigo-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" */}
-            {meta.links && meta.links.map((link, ind) => (
-              <a
-                href="#"
-                onClick={ev => onClick(ev, link)}
-                key={ind}
-                aria-current="page"
-                className={
-                  "relative z-10 inline-flex items-center border   px-4 py-2 text-sm font-medium focus:z-20 hover:bg-gray-50 "
-                  + (ind === 0 ? 'rounded-l-md ' : '')
-                  + (ind === meta.links.length - 1 ? 'rounded-r-md ' : '')
-                  + (link.active ? 'border-indigo-500 bg-indigo-50 text-indigo-600 ' : '')
-                }
-                dangerouslySetInnerHTML={{ __html: link.label }}
-              >
-              </a>
-            ))}
-          </nav>
-          }
+          {meta.total > meta.per_page && (
+            <nav
+              className="isolate inline-flex -space-x-px rounded-md shadow-sm"
+              aria-label="Pagination"
+            >
+              {meta.links &&
+                meta.links.map((link, ind) => (
+                  <a
+                    href="#"
+                    onClick={(ev) => onClick(ev, link)}
+                    key={ind}
+                    aria-current="page"
+                    className={
+                      "relative z-10 inline-flex items-center border px-4 py-2 text-sm font-medium focus:z-20 hover:bg-gray-200 " +
+                      (ind === 0 ? "rounded-l-md " : "") +
+                      (ind === meta.links.length - 1 ? "rounded-r-md " : "") +
+                      (link.active
+                        ? "border-indigo-500 bg-indigo-50 text-indigo-600 "
+                        : "")
+                    }
+                    dangerouslySetInnerHTML={{ __html: link.label }}
+                  ></a>
+                ))}
+            </nav>
+          )}
         </div>
       </div>
     </div>

@@ -3,8 +3,7 @@ import { PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useStateContext } from "../contexts/ContextProvider";
-import PropTypes from 'prop-types';
-
+import PropTypes from "prop-types";
 
 export default function QuestionEditor({
   index = 0,
@@ -53,8 +52,10 @@ export default function QuestionEditor({
   }
 
   function deleteOption(op) {
-    model.data.options = model.data.options.filter(option => option.uuid != op.uuid)
-    setModel({...model})
+    model.data.options = model.data.options.filter(
+      (option) => option.uuid != op.uuid
+    );
+    setModel({ ...model });
   }
 
   return (
@@ -219,9 +220,10 @@ export default function QuestionEditor({
                       focus:border-indigo-500"
                       />
                       <button
-                        onClick={ev => deleteOption(op)}
+                        onClick={(ev) => deleteOption(op)}
                         type="button"
-                        className="            h-6
+                        className="
+                        h-6
                         w-6
                         rounded-full
                         flex

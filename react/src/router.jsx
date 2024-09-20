@@ -6,15 +6,15 @@ import Signup from "./views/Signup";
 import GuestLayout from "./components/GuestLayout";
 import DefaultLayout from "./components/DefaultLayout";
 import SurveyView from "./views/SurveyView";
+import SurveyPublicView from "./views/SurveyPublicView";
 
 const router = createBrowserRouter([
-
   {
-    path:"/",
+    path: "/",
     element: <DefaultLayout />,
     children: [
       {
-        path: '/dashboard',
+        path: "/dashboard",
         element: <Navigate to="/" />,
       },
       {
@@ -27,6 +27,10 @@ const router = createBrowserRouter([
       },
       {
         path: "/surveys/create",
+        element: <SurveyView />,
+      },
+      {
+        path: "/surveys/:id",
         element: <SurveyView />,
       },
     ],
@@ -44,6 +48,10 @@ const router = createBrowserRouter([
         element: <Signup />,
       },
     ],
+  },
+  {
+    path: "/survey/public/:slug",
+    element: <SurveyPublicView />,
   },
 ]);
 

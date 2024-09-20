@@ -1,16 +1,27 @@
 /** @type {import('tailwindcss').Config} */
- import forms from '@tailwindcss/forms';
+import forms from "@tailwindcss/forms";
 
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,jsx,ts,tsx}"
-  ],
+  content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      keyframes: {
+        "fade-in-down": {
+          from: {
+            transform: "translateY(-0.75rem)",
+            opacity: "0",
+          },
+          to: {
+            transform: "translateY(0rem)",
+            opacity: "1",
+          },
+        },
+      },
+      animation: {
+        "fade-in-down": "fade-in-down 0.4s ease-in-out both",
+      },
+    },
   },
-  plugins: [
-     forms,
 
-  ],
+  plugins: [forms],
 };

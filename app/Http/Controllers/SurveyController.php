@@ -236,7 +236,7 @@ class SurveyController extends Controller
         return new SurveyResource($survey);
     }
 
-   /*  public function storeAnswer(StoreSurveyAnswerRequest $request, Survey $survey)
+   public function storeAnswer(StoreSurveyAnswerRequest $request, Survey $survey)
     {
         $validated = $request->validated();
 
@@ -262,5 +262,5 @@ class SurveyController extends Controller
         }
 
         return response("", 201);
-    } */
+    } 
 }

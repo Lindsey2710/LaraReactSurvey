@@ -14,6 +14,7 @@ import surveyImage from "../assets/survey.png";
 import { useStateContext } from "../contexts/ContextProvider";
 import axiosClient from "../axios";
 import { useEffect } from "react";
+import Toast from "./Toast";
 
 
 const navigation = [
@@ -179,6 +180,7 @@ export default function DefaultLayout() {
           </DisclosurePanel>
         </Disclosure>
         <Outlet />
+        <Toast />
       </div>
     </>
   );

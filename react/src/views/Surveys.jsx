@@ -55,7 +55,7 @@ export default function Surveys() {
         <div>
           {surveys.length === 0 && (
             <div className="py-8 text-center text-gray-700">
-              You do not have surveys created
+              You did not create surveys yet
             </div>
           )}
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3">
