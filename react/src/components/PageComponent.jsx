@@ -20,7 +20,7 @@ export default function PageComponent({ title, buttons = "", children }) {
   );
 }
 
-/** codium quick fix met bovenaan import PropTypes */
+
 PageComponent.propTypes = {
   title: PropTypes.string.isRequired,
   buttons: PropTypes.node,

@@ -36,7 +36,7 @@ export default function SurveyPublicView() {
       .post(`/survey/${survey.id}/answer`, {
         answers,
       })
-      .then((response) => {
+      .then(() => {
         setSurveyFinished(true);
       });
   }
