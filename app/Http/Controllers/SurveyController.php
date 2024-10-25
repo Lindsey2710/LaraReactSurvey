@@ -247,7 +247,7 @@ class SurveyController extends Controller
         ]);
 
         foreach ($validated['answers'] as $questionId => $answer) {
-            $question = SurveyQuestion::where(['id' => $questionId, 'survey_id' => $survey->id])->get();
+            $question = SurveyQuestion::where(['id' => $questionId, 'survey_id' => $survey->id])->first();
             if (!$question) {
                 return response("Invalid question ID: \"$questionId\"", 400);
             }
@@ -262,5 +262,15 @@ class SurveyController extends Controller
         }
 
         return response("", 201);
-    } 
+    }
+
+    public function getSurveyAnswers(Survey $survey)
+    {
+      $answers = SurveyAnswer::where('survey_id', $survey->id)
+        ->with(['questionAnswers.question'])
+        ->get();
+
+    return response()->json($answers);
+    }
+
 }

@@ -88,7 +88,7 @@ export default function Dashboard() {
                   </TButton>
 
                    {/** TODO: Make view answers */}
-                  <TButton link>
+                  <TButton to={`/surveys/${data.latestSurvey.id}/answers`} link>
                     <EyeIcon className="w-5 h-5 mr-2" />
                     View Answers
                   </TButton>
