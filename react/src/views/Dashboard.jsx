@@ -87,7 +87,6 @@ export default function Dashboard() {
                     Edit Survey
                   </TButton>
 
-                   {/** TODO: Make view answers */}
                   <TButton to={`/surveys/${data.latestSurvey.id}/answers`} link>
                     <EyeIcon className="w-5 h-5 mr-2" />
                     View Answers
@@ -97,7 +96,7 @@ export default function Dashboard() {
             )}
             {!data.latestSurvey && (
               <div className="text-gray-600 text-center py-16">
-                Your do not have surveys yet
+                You do not have surveys yet
               </div>
             )}
           </DashboardCard>
@@ -125,7 +124,7 @@ export default function Dashboard() {
             )}
             {!data.latestAnswers.length && (
               <div className="text-gray-600 text-center py-16">
-                Your do not have answers yet
+                You do not have answers yet
               </div>
             )}
           </DashboardCard>
