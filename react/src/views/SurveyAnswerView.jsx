@@ -10,10 +10,14 @@ const SurveyAnswersView = () => {
   useEffect(() => {
     axiosClient.get(`/surveys/${id}/answers`)
       .then(({ data }) => {
+        //console.log("API response:", data);
         setAnswers(data);
         setLoading(false);
       })
-      .catch(() => setLoading(false));
+      .catch((error) => {
+        // console.log("API error:", error);
+        setLoading(false)
+      });
   }, [id]);
 
   if (loading) {
@@ -28,11 +32,11 @@ const SurveyAnswersView = () => {
       )}
       {answers.map((answer, index) => (
         <div key={index} className="p-4 mb-4 border rounded">
-          <h3>Answer {index + 1}:</h3>
+          <h3 className="text-2xl font-semibold mb-2 underline">Answer Set {index + 1}:</h3>
           <ul>
             {answer.question_answers.map((qa, idx) => (
-              <li key={idx}>
-                <strong>{qa.question.text}:</strong> {renderAnswer(qa)}
+              <li key={idx} className="mb-2">
+                <strong>*{qa.question.question || "Question not found"} </strong><br />Antwoord: {renderAnswer(qa)}
               </li>
             ))}
           </ul>
@@ -43,12 +47,10 @@ const SurveyAnswersView = () => {
 };
 
 const renderAnswer = (qa) => {
-  if (qa.question.type === 'checkbox') {
+  if (qa.question && qa.question.type === 'checkbox') {
     return JSON.parse(qa.answer).join(', ');
   }
   return qa.answer;
 };
 
 export default SurveyAnswersView;
-
-
