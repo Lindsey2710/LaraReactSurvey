@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { ArrowTopRightOnSquareIcon, TrashIcon } from '@heroicons/react/20/solid';
-import { PencilIcon } from '@heroicons/react/24/outline';
+import { PencilIcon, EyeIcon } from '@heroicons/react/24/outline';
 import TButton from './core/TButton';
 
 export default function SurveyListItem({ survey, onDeleteClick }) {
@@ -18,10 +18,16 @@ export default function SurveyListItem({ survey, onDeleteClick }) {
       ></div>
 
       <div className="flex justify-between items-center mt-3">
-        <TButton to={`/surveys/${survey.id}`}>
-          <PencilIcon className="w-5 h-5 mr-2 " />
-          Edit
-        </TButton>
+        <div className="flex items-center gap-2">
+          <TButton to={`/surveys/${survey.id}`}>
+            <PencilIcon className="w-5 h-5 mr-2" />
+            Edit
+          </TButton>
+          <TButton to={`/surveys/${survey.id}/answers`} link>
+            <EyeIcon className="w-5 h-5 mr-2" />
+            View Answers
+          </TButton>
+        </div>
         <div className="flex items-center">
           <TButton href={`/survey/public/${survey.slug}`} circle link>
             <ArrowTopRightOnSquareIcon className="w-5 h-5" />
@@ -46,5 +52,4 @@ SurveyListItem.propTypes = {
     description: PropTypes.string,
     slug: PropTypes.string,
     onDeleteClick: PropTypes.func,
-
 };
