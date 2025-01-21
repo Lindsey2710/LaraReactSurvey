@@ -44,17 +44,24 @@ export default function Surveys() {
     <PageComponent
       title="Surveys"
       buttons={
-        <TButton color="green" to="/surveys/create">
+        <TButton color="green" to="/surveys/create" className="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 transition-all duration-200">
           <PlusCircleIcon className="h-6 w-6 mr-2" />
           Create new
         </TButton>
       }
     >
-      {loading && <div className="text-center text-lg">Loading...</div>}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-indigo-200 via-purple-100 to-blue-100" />
+
+      {loading && (
+        <div className="flex justify-center items-center h-40">
+          <div className="animate-pulse text-indigo-600 text-xl">Loading...</div>
+        </div>
+      )}
+      
       {!loading && (
         <div>
           {surveys.length === 0 && (
-            <div className="py-8 text-center text-gray-700">
+            <div className="py-8 text-center text-gray-700 bg-white/80 backdrop-blur-sm rounded-lg shadow-md">
               You did not create surveys yet
             </div>
           )}
@@ -67,7 +74,15 @@ export default function Surveys() {
               />
             ))}
           </div>
-          {surveys.length > 0 && <PaginationLinks meta={meta} onPageClick={onPageClick} />}
+          {surveys.length > 0 && (
+            <div className="flex justify-center mt-8">
+              <PaginationLinks 
+                meta={meta} 
+                onPageClick={onPageClick}
+                className="bg-white/80 backdrop-blur-sm rounded-lg shadow-md p-2"
+              />
+            </div>
+          )}
         </div>
       )}
     </PageComponent>
